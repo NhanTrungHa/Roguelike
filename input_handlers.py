@@ -20,7 +20,7 @@ class EventHandler(tcod.event.EventDispatch[Action]):
             if action is None:
                 continue
 
-            action.perform(self)
+            action.perform()
             self.engine.handle_enemy_turns()
             self.engine.update_fov()  # update fov before next player action
 
@@ -42,6 +42,14 @@ class EventHandler(tcod.event.EventDispatch[Action]):
             action = BumpAction(player, dx=-1, dy=0)
         elif key == tcod.event.K_l:
             action = BumpAction(player, dx=1, dy=0)
+        elif key == tcod.event.K_u:
+            action = BumpAction(player, dx=1, dy=-1)
+        elif key == tcod.event.K_y:
+            action = BumpAction(player, dx=-1, dy=-1)
+        elif key == tcod.event.K_b:
+            action = BumpAction(player, dx=-1, dy=1)
+        elif key == tcod.event.K_n:
+            action = BumpAction(player, dx=1, dy=1)
         elif key == tcod.event.K_ESCAPE:
             action = EscapeAction(player)
 
